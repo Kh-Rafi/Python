@@ -1,0 +1,23 @@
+from html.parser import HTMLParser
+
+class MyHTMLParser(HTMLParser):
+    def handle_starttag(self, tag, attrs):
+        print(f"Start : {tag}")
+        for attr in attrs:
+            print(f"-> {attr[0]} > {attr[1]}")
+            
+    def handle_endtag(self, tag):
+        print(f"End   : {tag}")
+        
+    def handle_startendtag(self, tag, attrs):
+        print(f"Empty : {tag}")
+        for attr in attrs:
+            print(f"-> {attr[0]} > {attr[1]}")
+
+parser = MyHTMLParser()
+
+n = int(input())
+
+html_string = "".join([input().strip() for _ in range(n)])
+
+parser.feed(html_string)
